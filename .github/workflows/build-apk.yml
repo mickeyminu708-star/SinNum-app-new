@@ -23,12 +23,15 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.5'
+          # Agar aapka project subfolder me hai, toh yahan folder ka naam dein (jaise SinNum-app-new agar wahi name hai)
+          # Lekin agar sab kuch ek level andar hai toh niche working-directory use karenge:
 
       - name: Build Debug APK
+        working-directory: ./SinNum-app-new
         run: gradle assembleDebug --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: SinNum-Hybrid-App
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: SinNum-app-new/app/build/outputs/apk/debug/app-debug.apk
